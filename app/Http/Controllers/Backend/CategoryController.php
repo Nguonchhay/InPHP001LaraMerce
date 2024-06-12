@@ -39,18 +39,24 @@ class CategoryController extends Controller
 
     }
 
-    public function edit()
+    public function edit(Category $category)
     {
-
+        return view('backend.categories.edit', [
+            'category' => $category
+        ]);
     }
 
-    public function update()
+    public function update(Category $category, Request $request)
     {
-
+        $category->title = $request->get('title');
+        $category->highted = $request->has('highted') ? 1 : 0;
+        $category->save();
+        return redirect(route('backend.categories.index'));
     }
 
-    public function destroy()
+    public function destroy(Category $category)
     {
-
+        $category->delete();
+        return redirect(route('backend.categories.index'));
     }
 }

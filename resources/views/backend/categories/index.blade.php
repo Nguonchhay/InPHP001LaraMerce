@@ -46,8 +46,12 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="">
-                                                    <button type="button" class="btn btn-default">Edit</button>
-                                                    <button type="button" class="btn btn-danger">Delete</button>
+                                                    <a href="{{ route('backend.categories.edit', $category->id) }}" class="btn btn-default">Edit</a>
+                                                    <button onclick="deleteCategory({{ $category->id }})" type="button" class="btn btn-danger">Delete</button>
+                                                    <form id="frmDeleteCategory{{ $category->id }}" action="{{ route('backend.categories.destroy', $category->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -55,6 +59,13 @@
                                 @endif
                             </tbody>
                         </table>
+                        <script>
+                            function deleteCategory(selectedId) {
+                                if (confirm('Are you sure?')) {
+                                    document.getElementById('frmDeleteCategory' + selectedId).submit();
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
