@@ -24,9 +24,14 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $category = new Category();
+        $category->title = $request->get('title');
+        $category->highted = $request->has('highted') ? 1 : 0;
+        $category->save();
 
+        return redirect(route('backend.categories.index'));
     }
 
     public function show()

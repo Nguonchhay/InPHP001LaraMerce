@@ -20,14 +20,15 @@
                     </div>
                     <div class="col-md-9">
                         <h2>New Category</h2>
-                        <form>
+                        <form method="POST" action="{{ route('backend.categories.store') }}">
+                            @csrf
                             <div class="mb-3">
                                 <label for="title" class="form-label">Title *</label>
                                 <input type="text" class="form-control" required id="title" name="title">
                             </div>
                             <div class="mb-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="0" name="highted" id="highted">
+                                    <input class="form-check-input" type="checkbox" value="1" name="highted" id="highted">
                                     <label class="form-check-label" for="highted">
                                         Show in home page?
                                     </label>

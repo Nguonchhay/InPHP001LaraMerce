@@ -37,12 +37,21 @@
                                         <td colspan="4">There is no record.</td>
                                     </tr>
                                 @else
-                                <!-- <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr> -->
+                                    @foreach($categories as $category)
+                                        <tr>
+                                            <th scope="row">{{ $category->id }}</th>
+                                            <td>{{ $category->title }}</td>
+                                            <td>
+                                                {{ $category->highted ? 'YES' : 'NO' }}
+                                            </td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="">
+                                                    <button type="button" class="btn btn-default">Edit</button>
+                                                    <button type="button" class="btn btn-danger">Delete</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endif
                             </tbody>
                         </table>
