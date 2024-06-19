@@ -3,11 +3,11 @@
 @section('content')
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Categories</h1>
+        <h1 class="text-center text-white display-6">Products</h1>
         <ol class="breadcrumb justify-content-center mb-0">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">Categories</li>
+            <li class="breadcrumb-item active text-white">Products</li>
         </ol>
     </div>
     <!-- Single Page Header End -->
@@ -19,36 +19,38 @@
                         @include('includes.backend.menu')
                     </div>
                     <div class="col-md-9">
-                        <h2>Category list</h2>
+                        <h2>Product list</h2>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Show in Home?</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Image</th>
                                     <th scope="col">
-                                        <a href="{{ route('backend.categories.create') }}" class="btn btn-primary">+ New</a>
+                                        <a href="{{ route('backend.products.create') }}" class="btn btn-primary">+ New</a>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($categories->isEmpty())
+                                @if($products->isEmpty())
                                     <tr>
-                                        <td colspan="4">There is no record.</td>
+                                        <td colspan="8">There is no record.</td>
                                     </tr>
                                 @else
-                                    @foreach($categories as $category)
+                                    @foreach($products as $item)
                                         <tr>
-                                            <th scope="row">{{ $category->id }}</th>
-                                            <td>{{ $category->title }}</td>
+                                            <th scope="row">{{ $item->id }}</th>
+                                            <td>{{ $item->category->title }}</td>
+                                            <td>{{ $item->name }}</td>
                                             <td>
-                                                {{ $category->highted ? 'YES' : 'NO' }}
+                                                <img src="{{ asset($item->image_url) }}" alt="{{ $item->name }}"/>
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="">
-                                                    <a href="{{ route('backend.categories.edit', $category->id) }}" class="btn btn-default">Edit</a>
-                                                    <button onclick="deleteCategory({{ $category->id }})" type="button" class="btn btn-danger">Delete</button>
-                                                    <form id="frmDeleteCategory{{ $category->id }}" action="{{ route('backend.categories.destroy', $category->id) }}" method="POST">
+                                                    <a href="{{ route('backend.products.edit', $item->id) }}" class="btn btn-default">Edit</a>
+                                                    <button onclick="deleteModelItem({{ $item->id }})" type="button" class="btn btn-danger">Delete</button>
+                                                    <form id="frmModelDeletion{{ $item->id }}" action="{{ route('backend.products.destroy', $item->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
@@ -60,9 +62,9 @@
                             </tbody>
                         </table>
                         <script>
-                            function deleteCategory(selectedId) {
+                            function deleteModelItem(selectedId) {
                                 if (confirm('Are you sure?')) {
-                                    document.getElementById('frmDeleteCategory' + selectedId).submit();
+                                    document.getElementById('frmModelDeletion' + selectedId).submit();
                                 }
                             }
                         </script>

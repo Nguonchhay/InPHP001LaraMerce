@@ -12,4 +12,11 @@ Route::post('/backend/categories', [App\Http\Controllers\Backend\CategoryControl
 Route::get('/backend/categories/{category}/edit', [App\Http\Controllers\Backend\CategoryController::class, 'edit'])->name('backend.categories.edit');
 Route::put('/backend/categories/{category}', [App\Http\Controllers\Backend\CategoryController::class, 'update'])->name('backend.categories.update');
 Route::delete('/backend/categories/{category}', [App\Http\Controllers\Backend\CategoryController::class, 'destroy'])->name('backend.categories.destroy');
+
+Route::resource(
+    'backend/products',
+    App\Http\Controllers\Backend\ProductController::class,
+    [ 'as' => 'backend']
+);
+
 Auth::routes();
