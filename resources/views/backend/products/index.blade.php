@@ -48,7 +48,8 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="">
-                                                    <a href="{{ route('backend.products.edit', $item->id) }}" class="btn btn-default">Edit</a>
+                                                    <a href="{{ route('backend.products.show', $item->id) }}" class="btn btn-default">Show</a>
+                                                    <a href="{{ route('backend.products.edit', $item->id) }}" class="btn btn-primary">Edit</a>
                                                     <button onclick="deleteModelItem({{ $item->id }})" type="button" class="btn btn-danger">Delete</button>
                                                     <form id="frmModelDeletion{{ $item->id }}" action="{{ route('backend.products.destroy', $item->id) }}" method="POST">
                                                         @csrf

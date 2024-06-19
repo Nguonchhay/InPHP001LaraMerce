@@ -66,6 +66,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        $product->delete();
+        // Add logic to remove file from server
         return redirect()->route('backend.products.index');
     }
 
