@@ -27,6 +27,21 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'category_id' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'unit_price' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,gif|max:2048'
+        ]);
+
+        $productData = $request->all();
+        
+        $imagePathAndFileName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('upload_images'), $imagePathAndFileName);
+
+        $productData['image_url'] = 'upload_images/' . $imagePathAndFileName;
+        Product::create($productData);
         return redirect()->route('backend.products.index');
     }
 

@@ -44,7 +44,7 @@
                                             <td>{{ $item->category->title }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>
-                                                <img src="{{ asset($item->image_url) }}" alt="{{ $item->name }}"/>
+                                                <img class="w-25" src="{{ asset($item->image_url) }}" alt="{{ $item->name }}"/>
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="">

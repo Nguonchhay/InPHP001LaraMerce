@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-9">
                         <h2>New Product</h2>
-                        <form method="POST" action="{{ route('backend.products.store') }}">
+                        <form method="POST" action="{{ route('backend.products.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="category_id" class="form-label">Category *</label>
@@ -48,8 +48,8 @@
                                 <input type="number" class="form-control" required id="qtn_in_stock" name="qtn_in_stock" value="0">
                             </div>
                             <div class="mb-3">
-                                <label for="image_url" class="form-label">Image *</label>
-                                <input type="file" class="form-control" required id="image_url" name="image_url">
+                                <label for="image" class="form-label">Image *</label>
+                                <input type="file" accept="image/png, image/gif, image/jpeg" class="form-control" required id="image" name="image">
                             </div>
                             <div class="mb-3">
                                 <a href="{{ route('backend.products.index') }}" class="btn btn-default">Back to list</a>
