@@ -19,10 +19,13 @@
                         @include('includes.backend.menu')
                     </div>
                     <div class="col-md-9">
-                        <h2>New Product</h2>
-                        <form method="POST" action="{{ route('backend.products.store') }}" enctype="multipart/form-data">
+                        <h2>Edit Product</h2>
+                        <form method="POST" action="{{ route('backend.products.update', $product->id) }}" enctype="multipart/form-data">
+                            @method('PUT')
                             @csrf
-                            @include('backend.products.includes.fields')
+                            @include('backend.products.includes.fields', [
+                                'product' => $product
+                            ])
                             <div class="mb-3">
                                 <a href="{{ route('backend.products.index') }}" class="btn btn-default">Back to list</a>
                                 <button type="submit" class="btn btn-primary">Save</button>

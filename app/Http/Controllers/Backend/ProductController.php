@@ -54,13 +54,42 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        $categories = Category::pluck('title', 'id');
         return view('backend.products.edit', [
-            'product' => $product
+            'product' => $product,
+            'categories' => $categories
         ]);
     }
 
     public function update(Product $product, Request $request)
     {
+        $request->validate([
+            'category_id' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'unit_price' => 'required',
+            'qty_in_stock' => 'required'
+        ]);
+
+        $product->category_id = $request->get('category_id');
+        $product->name = $request->get('name');
+        $product->description = $request->get('description');
+        $product->unit_price = $request->get('unit_price');
+        $product->qty_in_stock = intval($request->get('qty_in_stock'));
+
+        if ($request->image) {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,gif|max:2048'
+            ]);
+            $imagePathAndFileName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('upload_images'), $imagePathAndFileName);
+
+            $product->image_url = 'upload_images/' . $imagePathAndFileName;
+        }
+
+        $product->save();
+        // Remove old image if we updated
+
         return redirect()->route('backend.products.index');
     }
 
