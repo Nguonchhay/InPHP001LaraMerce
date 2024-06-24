@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Category;
 
@@ -11,7 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(50);
+        $products = Product::where('owner_id', Auth::id())->paginate(50);
         return view('backend.products.index', [
             'products' => $products
         ]);
@@ -41,6 +42,7 @@ class ProductController extends Controller
         $request->image->move(public_path('upload_images'), $imagePathAndFileName);
 
         $productData['image_url'] = 'upload_images/' . $imagePathAndFileName;
+        $productData['owner_id'] = Auth::id();
         Product::create($productData);
         return redirect()->route('backend.products.index');
     }

@@ -1,5 +1,6 @@
 <div>
     <h2>Menu</h2>
+    <span>Logged in as {{ Auth::user()->name }}</span>
     <ul class="list-group">
         <li class="list-group-item">
             <a href="{{ route('backend.categories.index') }}">Dashboard</a>

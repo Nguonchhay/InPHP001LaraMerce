@@ -25,7 +25,7 @@
 </div>
 <div class="mb-3">
     <label for="image" class="form-label">Image *</label>
-    <input type="file" accept="image/png, image/gif, image/jpeg" class="form-control" {{ empty($product) ? required : '' }} id="image" name="image">
+    <input type="file" accept="image/png, image/gif, image/jpeg" class="form-control" {{ empty($product) ? 'required' : '' }} id="image" name="image">
     @if(!empty($product))
         <p class="mt-3">Existing image: </p>
         <img src="{{ asset($product->image_url) }}" class="w-50" alt="" />
