@@ -10,5 +10,11 @@
         <li class="list-group-item">
             <a href="{{ route('backend.products.index') }}">Products</a>
         </li>
+        <li class="list-group-item">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-default">Logout</button>
+            </form>
+        </li>
     </ul>
 </div>
