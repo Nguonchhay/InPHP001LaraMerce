@@ -4,9 +4,13 @@
         <li class="list-group-item">
             <a href="{{ route('backend.categories.index') }}">Dashboard</a>
         </li>
-        <li class="list-group-item">
-            <a href="{{ route('backend.categories.index') }}">Categories</a>
-        </li>
+        
+        @can('crudCategory')
+            <li class="list-group-item">
+                <a href="{{ route('backend.categories.index') }}">Categories</a>
+            </li>
+        @endcan
+        
         <li class="list-group-item">
             <a href="{{ route('backend.products.index') }}">Products</a>
         </li>
