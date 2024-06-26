@@ -13,10 +13,11 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        $pagination = config('settings.product_pagination');
         if ($request->user()->role === ROLE_ADMIN) {
-            $products = Product::paginate(50);
+            $products = Product::paginate($pagination);
         } else {
-            $products = Product::where('owner_id', Auth::id())->paginate(50);
+            $products = Product::where('owner_id', Auth::id())->paginate($pagination);
         }
         
         return view('backend.products.index', [

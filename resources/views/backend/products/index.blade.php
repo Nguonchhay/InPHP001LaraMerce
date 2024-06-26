@@ -62,6 +62,9 @@
                                 @endif
                             </tbody>
                         </table>
+                        <div class="pagination">
+                            {{ $products->links() }}
+                        </div>
                         <script>
                             function deleteModelItem(selectedId) {
                                 if (confirm('Are you sure?')) {
