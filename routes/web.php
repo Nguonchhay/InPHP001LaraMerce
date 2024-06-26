@@ -22,6 +22,8 @@ Route::group([
         Route::put('/categories/{category}', [App\Http\Controllers\Backend\CategoryController::class, 'update'])->name('backend.categories.update');
         Route::delete('/categories/{category}', [App\Http\Controllers\Backend\CategoryController::class, 'destroy'])->name('backend.categories.destroy');    
     });
+
+    Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class, 'index'])->name('backend.dashboard.index');
     
    
     Route::resource(

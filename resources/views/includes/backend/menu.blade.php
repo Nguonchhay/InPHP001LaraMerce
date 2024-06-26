@@ -3,7 +3,7 @@
     <span>Logged in as {{ Auth::user()->name }}</span>
     <ul class="list-group">
         <li class="list-group-item">
-            <a href="{{ route('backend.categories.index') }}">Dashboard</a>
+            <a href="{{ route('backend.dashboard.index') }}">Dashboard</a>
         </li>
         
         @can('crudCategory')
