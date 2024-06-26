@@ -10,9 +10,14 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::where('owner_id', Auth::id())->paginate(50);
+        if ($request->user()->role === ROLE_ADMIN) {
+            $products = Product::paginate(50);
+        } else {
+            $products = Product::where('owner_id', Auth::id())->paginate(50);
+        }
+        
         return view('backend.products.index', [
             'products' => $products
         ]);
