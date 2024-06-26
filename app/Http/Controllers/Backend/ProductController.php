@@ -52,8 +52,11 @@ class ProductController extends Controller
         return redirect()->route('backend.products.index');
     }
 
-    public function show(Product $product)
+    public function show(Product $product, Request $request)
     {
+        if ($request->user()->cannot('showProduct', $product)) {
+            abort(403);
+        }
         return view('backend.products.show', [
             'product' => $product
         ]);
