@@ -19,4 +19,14 @@ class ProductPolicy
     {
         return $user->role === ROLE_ADMIN || $user->id === $product->owner_id;
     }
+
+    public function updateProduct(User $user, Product $product)
+    {
+        return $user->role === ROLE_ADMIN || $user->id === $product->owner_id;
+    }
+
+    public function deleteProduct(User $user, Product $product)
+    {
+        return $user->role === ROLE_ADMIN || $user->id === $product->owner_id;
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Product;
 use App\Models\Category;
 
@@ -64,6 +65,8 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        Gate::authorize('updateProduct', $product);
+
         $categories = Category::pluck('title', 'id');
         return view('backend.products.edit', [
             'product' => $product,
@@ -73,6 +76,10 @@ class ProductController extends Controller
 
     public function update(Product $product, Request $request)
     {
+        if (! Gate::allows('updateProduct', $product)) {
+            abort(403);
+        }
+
         $request->validate([
             'category_id' => 'required',
             'name' => 'required',
@@ -105,6 +112,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        Gate::authorize('deleteProduct', $product);
         $product->delete();
         // Add logic to remove file from server
         return redirect()->route('backend.products.index');
