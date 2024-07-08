@@ -12,11 +12,17 @@ class ProductAPIController extends ApiController
     public function index()
     {
         $products = Product::get();
-        return new ProductCollection($products);
+        return $this->sendSuccess(
+            new ProductCollection($products),
+            'Product list'
+        );
     }
 
     public function show(Product $product)
     {
-        return new ProductResource($product);
+        return $this->sendSuccess(
+            [new ProductResource($product)],
+            'Product detail'
+        );
     }
 }
