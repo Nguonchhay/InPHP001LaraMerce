@@ -15,4 +15,13 @@ abstract class ApiController extends Controller
             'data' => $data
         ];
     }
+
+    public function sendError($message, $error = [], $status = 400)
+    {
+        return [
+            'status' => $status,
+            'message' => $message,
+            'error' => $error
+        ];
+    }
 }
